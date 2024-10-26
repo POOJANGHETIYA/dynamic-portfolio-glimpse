@@ -15,6 +15,9 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => {
+  return res.status(200).json({ message: 'Response from dynamic-portfolio api....' });
+});
 app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
