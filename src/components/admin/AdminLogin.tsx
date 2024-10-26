@@ -9,8 +9,26 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState("");
   const { toast } = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // For development, using hardcoded credentials
+    if (username === "admin" && password === "admin") {
+      localStorage.setItem("adminToken", "dummy-token");
+      onLogin();
+      toast({
+        title: "Success",
+        description: "Logged in successfully",
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: "Invalid credentials",
+        variant: "destructive",
+      });
+    }
+
+    /* API integration code
     try {
       const response = await fetch("/api/admin/login", {
         method: "POST",
@@ -40,6 +58,7 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
         variant: "destructive",
       });
     }
+    */
   };
 
   return (
